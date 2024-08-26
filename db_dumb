@@ -1,0 +1,35 @@
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cbno VARCHAR(20) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    gender VARCHAR(100) NOT NULL,
+
+);
+
+
+CREATE TABLE address (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    city VARCHAR(100) NOT NULL,
+    postalcode VARCHAR(20) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    student_id INT UNIQUE NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+
+-- Create courses table
+CREATE TABLE courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL
+);
+
+-- Create the joining table because of many to many relationship
+CREATE TABLE enrollments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+
